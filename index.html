@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="no-js">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lucas & Valentina | Nos casamos</title>
+<script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
@@ -57,11 +58,13 @@
 
   /* ============ SOBRE DE APERTURA ============ */
   #envelope-screen{
-    position:fixed; inset:0; display:flex; flex-direction:column;
+    display:none;
+    position:fixed; inset:0; flex-direction:column;
     align-items:center; justify-content:center;
     background: radial-gradient(ellipse at 50% 20%, var(--verde-claro), var(--verde) 75%);
     z-index:50; transition: opacity 1s ease, visibility 1s ease;
   }
+  .js #envelope-screen{ display:flex; }
   #envelope-screen.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
 
   .envelope-label{
@@ -150,21 +153,21 @@
   }
   .panel.light{ background: var(--papel); color: var(--carbon); }
   .panel.dark{ background: var(--verde); color: var(--marfil); }
-  .panel.curtain{
-    clip-path: inset(0 0 100% 0);
-    transition: clip-path 1.15s cubic-bezier(.65,0,.35,1);
-  }
+  .panel.curtain{ transition: clip-path 1.15s cubic-bezier(.65,0,.35,1); }
+  .js .panel.curtain{ clip-path: inset(0 0 100% 0); }
   .panel.curtain.in{ clip-path: inset(0 0 0% 0); }
 
   .section{ max-width: 660px; margin: 0 auto; padding: 5rem 1.75rem; text-align:center; position:relative; }
 
-  .reveal{ opacity:0; transform: translateY(36px); transition: opacity 1s cubic-bezier(.2,.7,.3,1), transform 1s cubic-bezier(.2,.7,.3,1); }
+  .reveal{ transition: opacity 1s cubic-bezier(.2,.7,.3,1), transform 1s cubic-bezier(.2,.7,.3,1); }
+  .js .reveal{ opacity:0; transform: translateY(36px); }
   .reveal.in{ opacity:1; transform: translateY(0); }
 
   .eyebrow{ font-family:'Cinzel', serif; letter-spacing:0.4em; font-size:0.7rem; text-transform:uppercase; color: var(--verde-claro); margin-bottom:1.2rem; }
   .panel.dark .eyebrow{ color: var(--oro-claro); }
 
-  .stagger-word{ display:inline-block; opacity:0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .stagger-word{ display:inline-block; transition: opacity .6s ease, transform .6s ease; }
+  .js .stagger-word{ opacity:0; transform: translateY(14px); }
   .reveal.in .stagger-word{ opacity:1; transform: translateY(0); }
 
   /* HERO */
@@ -184,16 +187,20 @@
     background: linear-gradient(100deg, var(--verde) 30%, var(--oro) 48%, var(--verde) 66%);
     background-size: 260% 100%; -webkit-background-clip: text; background-clip: text;
     position:relative; z-index:1;
+    opacity:1; transform:none;
   }
+  .js .names{ opacity:0; transform: translateY(18px) scale(0.96); }
   .names.shine{ animation: shimmer 3.5s ease-in-out 1.4s 1; }
   @keyframes shimmer{ 0%{ background-position: 0% 0; } 100%{ background-position: 200% 0; } }
   .names .amp{ display:block; color: var(--oro); font-size: 0.55em; margin: 0.1em 0; -webkit-text-fill-color: var(--oro); }
 
-  .hero-sub{ margin-top:1.5rem; font-size:1.15rem; letter-spacing:0.08em; opacity:0; }
-  .hero-date{ margin-top:0.6rem; font-family:'Cinzel', serif; font-size:1rem; letter-spacing:0.25em; color: var(--verde-claro); text-transform:uppercase; opacity:0; }
+  .hero-sub{ margin-top:1.5rem; font-size:1.15rem; letter-spacing:0.08em; }
+  .hero-date{ margin-top:0.6rem; font-family:'Cinzel', serif; font-size:1rem; letter-spacing:0.25em; color: var(--verde-claro); text-transform:uppercase; }
+  .js .hero-sub, .js .hero-date{ opacity:0; }
 
   .divider{ width:100%; max-width:260px; margin: 2.6rem auto; display:block; }
-  .divider path, .divider circle{ stroke: var(--oro); stroke-dasharray: 200; stroke-dashoffset: 200; transition: stroke-dashoffset 1.4s ease; }
+  .divider path, .divider circle{ stroke: var(--oro); stroke-dasharray: 200; transition: stroke-dashoffset 1.4s ease; }
+  .js .divider path, .js .divider circle{ stroke-dashoffset: 200; }
   .reveal.in .divider path, .reveal.in .divider circle{ stroke-dashoffset: 0; }
 
   /* CUENTA REGRESIVA */
@@ -216,8 +223,9 @@
   .timeline::before{
     content:''; position:absolute; left:11px; top:6px; bottom:6px; width:1px;
     background: var(--oro-claro); opacity:0.5;
-    transform-origin: top; transform: scaleY(0); transition: transform 1.4s ease;
+    transform-origin: top; transition: transform 1.4s ease;
   }
+  .js .timeline::before{ transform: scaleY(0); }
   .timeline.in::before{ transform: scaleY(1); }
   .t-item{ position:relative; padding-bottom:2.1rem; }
   .t-item:last-child{ padding-bottom:0; }
