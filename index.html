@@ -153,9 +153,7 @@
   }
   .panel.light{ background: var(--papel); color: var(--carbon); }
   .panel.dark{ background: var(--verde); color: var(--marfil); }
-  .panel.curtain{ transition: clip-path 1.15s cubic-bezier(.65,0,.35,1); }
-  .js .panel.curtain{ clip-path: inset(0 0 100% 0); }
-  .panel.curtain.in{ clip-path: inset(0 0 0% 0); }
+  .panel.curtain{ transition: opacity .9s ease; }
 
   .section{ max-width: 660px; margin: 0 auto; padding: 5rem 1.75rem; text-align:center; position:relative; }
 
@@ -634,8 +632,12 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.18 });
+  }, { threshold: 0.01, rootMargin: '0px 0px -5% 0px' });
   revealEls.forEach(el => observer.observe(el));
+
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.in)').forEach(el => el.classList.add('in'));
+  }, 4000);
 
   const timelineEl = document.querySelector('.timeline');
   if(timelineEl){
